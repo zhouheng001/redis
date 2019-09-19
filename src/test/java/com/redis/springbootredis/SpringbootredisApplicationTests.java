@@ -1,5 +1,6 @@
 package com.redis.springbootredis;
 
+import com.redis.springbootredis.service.IService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +17,32 @@ import java.util.Set;
 public class SpringbootredisApplicationTests {
 
 
-	@Autowired
-	private StringRedisTemplate stringRedisTemplate;
-	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private IService service;
 
-	@Test
-	public void contextLoads() {
-//		stringRedisTemplate.opsForValue().set("zhou","jjsjf");
+    @Test
+    public void contextLoads() {
+//        stringRedisTemplate.opsForValue().set("zhou", "jjsjf");
 //		Set<String> zhou = stringRedisTemplate.keys("zhou");
 //		stringRedisTemplate.opsForZSet().add("1","123",5);
 //		stringRedisTemplate.opsForZSet().add("1","123456",4);
 //		stringRedisTemplate.opsForZSet().add("1","1234",8);
 
 
-		Set<String> range = stringRedisTemplate.opsForZSet().range("1", 0, -1);
-		Set<String> strings = stringRedisTemplate.opsForZSet().rangeByScore("1", 4, 5);
-		Set<String> strings1 = stringRedisTemplate.opsForZSet().reverseRangeByScore("1",1,3);
-		for (String s : strings1) {
-			System.out.println(s);
-		}
+//		Set<String> range = stringRedisTemplate.opsForZSet().range("1", 0, -1);
+//		Set<String> strings = stringRedisTemplate.opsForZSet().rangeByScore("1", 4, 5);
+//		Set<String> strings1 = stringRedisTemplate.opsForZSet().reverseRangeByScore("1",1,3);
+//		for (String s : strings1) {
+//			System.out.println(s);
+//		}
+        service.clean();
 
-	}
+        String s = service.ttest1();
+        System.out.println(s);
+    }
 
 }
