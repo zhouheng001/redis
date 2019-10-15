@@ -26,7 +26,7 @@ public class SpringbootredisApplicationTests {
 
     @Test
     public void contextLoads() {
-//        stringRedisTemplate.opsForValue().set("zhou", "jjsjf");
+        stringRedisTemplate.opsForValue().set("zhou", 1000+"");
 //		Set<String> zhou = stringRedisTemplate.keys("zhou");
 //		stringRedisTemplate.opsForZSet().add("1","123",5);
 //		stringRedisTemplate.opsForZSet().add("1","123456",4);
@@ -39,10 +39,31 @@ public class SpringbootredisApplicationTests {
 //		for (String s : strings1) {
 //			System.out.println(s);
 //		}
-        service.clean();
 
-        String s = service.ttest1();
-        System.out.println(s);
+//        service.clean();
+//
+//        String s = service.ttest1();
+//        System.out.println(s);
+
+        String zhou1 = stringRedisTemplate.opsForValue().get("zhou");
+        System.out.println(zhou1);
+        for (int i = 0; i <1000 ; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+//                    stringRedisTemplate.opsForValue().increment("zhou", 1);
+                    stringRedisTemplate.opsForValue().increment("zhou", -1);
+                }
+            }).start();
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String zhou = stringRedisTemplate.opsForValue().get("zhou");
+        System.out.println(zhou);
+
     }
 
 }
